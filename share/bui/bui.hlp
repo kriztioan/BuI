@@ -1,0 +1,469 @@
+[RUN]         
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Run CSDUST3 simulation.	
+
+  OPTIONS
+
+    None.
+
+  -----------------------------------------------
+
+[SET]
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Change input en output files. 
+
+  OPTIONS
+
+    1st parameter
+    =============
+	
+      input
+        Changes input and reads in input file
+
+      output
+        Changes output file
+
+      data
+        Changes output file for raw data
+
+      plot
+        Changes PostScript output file
+
+    2nd parameter
+    ============
+
+      file
+	filename
+
+  -----------------------------------------------
+
+[LIST]        
+  Christiaan Boersma		1 February 2004
+  ----------------------------------------------- 
+
+  DESCRIPTION
+
+    Displays command list.
+
+  OPTIONS    
+
+    None.
+
+  -----------------------------------------------
+
+[EXIT]        
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Quit BuI.
+
+  OPTIONS
+
+    None.
+
+  -----------------------------------------------
+      
+[SAVE]        
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Saves raw data to file.
+
+  OPTIONS
+
+    1st parameter
+    =============
+
+      irf
+ 	Interstellar radiation field
+
+      spec
+	Spectrum
+
+      emerg
+	Emergent flux
+
+      rhod
+	Density profile
+
+      tau0f
+	Optical depth at reference frequency
+
+      avflux
+	Average flux
+
+      coold
+	Cooling gradient
+
+      heatd
+	Heating gradient
+
+      td
+	Dust temperature
+
+      abundi# 
+	Dust abundance compontent #
+
+      tdi#
+	Temperature gradient dust component #
+
+      cooldi#
+	Cooling gradient dust compontent #
+
+      heatdi#
+	Heating gradient dust component #
+
+    1st parameter
+    =============
+
+     logx
+       Saves the logaritmic value of the x data
+
+     logy
+       Saves the logaritmic value of the y data
+     
+
+  -----------------------------------------------
+      
+[INFO]        
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Shows current file settings.
+
+  OPTIONS
+
+    None.
+
+  -----------------------------------------------
+
+[DISPLAY]     
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+   Displays the raw data.
+
+  OPTIONS
+
+    1st parameter
+    =============
+
+      irf
+ 	Interstellar radiation field
+
+      spec
+	Spectrum
+
+      emerg
+	Emergent flux
+
+      rhod
+	Density profile
+
+      tau0f
+	Optical depth at reference frequency
+
+      avflux
+	Average flux
+
+      coold
+	Cooling gradient
+
+      heatd
+	Heating gradient
+
+      td
+	Dust temperature
+
+      abundi# 
+	Dust abundance compontent #
+
+      tdi#
+	Temperature gradient dust component #
+
+      cooldi#
+	Cooling gradient dust compontent #
+
+      heatdi#
+	Heating gradient dust component #
+
+    1st parameter
+    =============
+
+     logx
+       Display the logaritmic value of the x data
+
+     logy
+       Displays the logaritmic value of the y data
+
+  -----------------------------------------------
+     
+[PLOT]     
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+   Saves raw data to PostScript file.
+
+  OPTIONS
+
+    1st parameter
+    =============
+
+      irf
+ 	Interstellar radiation field
+
+      spec
+	Spectrum
+
+      emerg
+	Emergent flux
+
+      rhod
+	Density profile
+
+      tau0f
+	Optical depth at reference frequency
+
+      avflux
+	Average flux
+
+      coold
+	Cooling gradient
+
+      heatd
+	Heating gradient
+
+      td
+	Dust temperature
+
+      abundi# 
+	Dust abundance compontent #
+
+      tdi#
+	Temperature gradient dust component #
+
+      cooldi#
+	Cooling gradient dust compontent #
+
+      heatdi#
+	Heating gradient dust component #
+
+    1st parameter
+    =============
+
+     logx
+       Saves the logaritmic value of the x data
+
+     logy
+       Saves the logaritmic value of the y data
+
+  -----------------------------------------------
+
+
+[CONTOUR]     
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+ 
+  DESCRIPTION
+
+    Creates and displays intensity maps for all frequencies
+
+  OPTIONS
+
+    None.
+
+  -----------------------------------------------
+     
+[UNKNOWN]     
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Internal BuI command; handles unknown requests.
+
+  OPTIONS
+
+    None.
+
+  -----------------------------------------------
+      
+[RETURN]     
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Internal BuI command; handles empty requests.
+
+  OPTIONS
+
+    None.
+
+  -----------------------------------------------
+
+[HELP]      
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+    BuI is a commandline user interface to CSDUST3, BuI stands for
+    Boersma User Interface and CSDUST3 is the third version of 
+    Circumstellar DUST.
+
+    CSDUST3 is the implementation of the model for radiative transfer in DIDC
+    (Dense Interstellar Dust Clouds) from Leung (1975, 1976b).
+    CSDUST3 is written by Egean et al. (1998) and is originally an FORTRAN77 program.
+
+    For further specifiek information I would like to redirect you to the documentation
+    section included in this distribution or otherwise to the BuI homepage at 
+    http://www.astro.rug.nl/~bui.
+
+  -----------------------------------------------
+
+[SHOW]        
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Displays CSDUST3 model input.
+
+  OPTIONS
+
+    1st parameter
+    =============
+
+      spatialgrid
+	Shows the 100 spatialgrid points.
+
+      wavelengthgrid
+	Shows the max 60 wavelengthgrid points.
+
+      irf
+	Shows the interstellar radiation field.
+
+      conv
+	Shows the convolutiongrid.	
+
+      dust
+	Shows all dust parameters.
+
+      paramters
+	Shows all CSDUST3 parameters.
+
+
+  -----------------------------------------------
+
+[SHELL]       
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Execute shell command.
+
+  OPTIONS
+
+    1st parameter
+    =============
+
+      <command>
+	Command.	
+
+  -----------------------------------------------
+
+[CREATE]      
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+  Adjust model parameters.   
+
+  OPTIONS
+
+    None.
+
+  REMARKS
+
+   Not yet implemented
+      
+  -----------------------------------------------
+
+[BUI_WINDOW]  
+
+  Christiaan Boersma		1 February 2004
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Change plot window configuration.
+
+  OPTIONS
+
+    1st parameter
+    =============
+
+      size
+	Change plot window size
+
+    2nd parameter
+    =============
+
+      <value>
+	Value
+
+  -----------------------------------------------
+
+[GRAPH]  
+
+  Christiaan Boersma		29 June 2010
+  -----------------------------------------------
+
+  DESCRIPTION
+
+    Change graph style.
+
+  OPTIONS
+
+    1st parameter
+    =============
+
+      symbol
+	Change plot symbol
+
+      color
+        Change plot color
+
+      lineweight
+        Change plot lineweight
+
+      type
+        Change plot type
+
+    2nd parameter
+    =============
+
+      <value>
+	Value
+
+  -----------------------------------------------
+

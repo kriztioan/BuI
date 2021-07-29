@@ -1,0 +1,6 @@
+set plot irf.ps
+run
+hardcopy irf
+exit
+
+

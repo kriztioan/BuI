@@ -1,0 +1,52 @@
+[COMMANDS]
+
+  <RUN>		   {run}      {runs simulation}
+  <SET>		   {set}      {sets and initializes files}
+  <LIST>           {list}     {this list}
+  <EXIT>           {exit}     {exits BuI}
+  <SAVE>           {save}     {saves results specified results to datafile}
+  <INFO>           {settings} {gives information on program settings}
+  <DISPLAY>        {plot}     {displays plot of data}
+  <PLOT>	   {hardcopy} {plot graph to PostScript file}
+  <CONTOUR>        {cont}     {displays contour levels for each frequency}
+  <UNKNOWN>        {unknown}  {internal BuI command}
+  <RETURN>         {return}   {internal BuI command}
+  <HELP>           {help}     {BuI help routine}
+  <SHOW>           {model}    {gives model parameters}
+  <SHELL>          {!}        {execute shell command}
+  <CREATE>	   {new}      {change model parameters}
+  <BUI_WINDOW>	   {window}   {change plot window layout}
+  <GRAPH>          {graph}    {change graph style}
+
+[MESSAGES]
+
+  <STARTUP>                     {Starting up BuI}
+  <SETMEMORYHANDLER>            {Memory handler set}
+  <SETENVIORMENTCONSTANTS>	{Envioronment constants set}
+  <INITIALIZEDLANGUAGE>		{Language initialized}
+
+  <INITIALIZEHELP>		{Initializing help}
+  <FAILINITIALIZEHELP>		{Failed initializing help... Aborting}
+  <LOADEDHELP>			{Loaded help}
+  <FAILEDLOADHELP>		{Failed loading help... Aborting}
+  <LOADEDCOMMANDS>		{Commands loaded}
+  <FAILEDLOADCOMMANDS>		{Failed loading commands... Aborting}
+
+  <FAILEDINPUTFILE>		{Failed reading input file... Aborting}
+  <INITIALIZEDHELP>		{Help initialized}
+
+  <INITIALIZEPGPLOT>            {Initializing PGPLOT}
+  <INITIALIZEDPGPLOT>           {PGPLOT initialized}
+  <FAILEDINITIALIZEPGPLOT>	{Failed initializing PGPLOT... Aborting}
+
+  <SETTINGCOMMANDFUNCTIONS>	{Setting commandfunctions}
+  <SETCOMMANDFUNCTIONS>		{Commandfunctions set}
+
+  <INITIALIZEUI>		{Initialising user-interface}
+  <DEFAULTSLOADED>		{Defaults loaded}
+  <INPUTFILELOADED>		{Inputfile loaded}
+
+  <WRITEHISTORY>                {Writting history file}
+  <FREEMEMORY>		 	{Freeing allocated memory}
+  <ENDPGPLOT>			{Ending CCPGPLOT}
+  <ONEXIT>			{Exiting BuI}
