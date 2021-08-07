@@ -75,7 +75,7 @@ int main(int argc, char *argv[], char *envp[]) {
     io.input_file = new char[n];
     snprintf(io.input_file, n, "%s/%s", buidir, INPUT_FILE);
   } else {
-    size_t n = strlen(buidir) + 1;
+    size_t n = strlen(INPUT_FILE) + 1;
     io.input_file = new char[n];
     strncpy(io.input_file, INPUT_FILE, n);
   }
