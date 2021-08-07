@@ -7,6 +7,8 @@
 
 A research report that describes and makes use of `BuI` can be found in the  [docs](docs/).
 
+![BuI in Action](BuI.png "BuI in Action")
+
 ## Usage
 
 `BuI` has at least the following requirements:
