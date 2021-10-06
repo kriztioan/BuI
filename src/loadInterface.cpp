@@ -29,57 +29,40 @@ void loadInterface() {
   struct sysinfo s_info;
   int error = sysinfo(&s_info); // error not used!
 
-  std::cout << "Loading interface \001\033[90;96m\n"
-            << std::endl
-            << "   "
-               "---------------------------------------------------------------"
-               "-------------------------"
-            << std::endl
-            << "   |                                                           "
-               "                           |"
-            << std::endl
-            << "   |   ******    **   ***   ***      Version " << env.version
-            << "       Christiaan Boersma " << env.year << "       |"
-            << std::endl
-            << "   |   **  ***   **   ***   ***                                "
-               "                           |"
-            << std::endl
-            << "   |   *******   **   ***                                      "
-               "                           |"
-            << std::endl
-            << "   |   *****     **   ***   ***                                "
-               "                           |"
-            << std::endl
-            << "   |   **  ***   ********   ***                                "
-               "                           |"
-            << std::endl
-            << "   |   *******   ********   ***                                "
-               "                           |"
-            << std::endl
-            << "   |   ******     ******    ***      "
-               "https://github.com/kriztioan/bui.git                 |"
-            << std::endl
-            << "   |   " << asc_time
-            << "                                                           |"
-            << std::endl
-            << "   |                                                           "
-               "                           |"
-            << std::endl
-            << "   "
-               "---------------------------------------------------------------"
-               "-------------------------\001\033[0;0m\n"
-            << std::endl
-            << "   Memory status : RAM     : total "
+  std::cout << "Loading interface \001\033[90;96m\n\n"
+            << "+--------------------------------------------------------------"
+               "---------------+\n"
+            << "|                                                              "
+               "               |\n"
+            << "|   ******    **   ***   ***    Version " << env.version
+            << "    Christiaan Boersma " << env.year << "   |\n"
+            << "|   **  ***   **   ***   ***                                   "
+               "               |\n"
+            << "|   *******   **   ***                                         "
+               "               |\n"
+            << "|   *****     **   ***   ***                                   "
+               "               |\n"
+            << "|   **  ***   ********   ***                                   "
+               "               |\n"
+            << "|   *******   ********   ***                                   "
+               "               |\n"
+            << "|   ******     ******    ***    "
+               "https://github.com/kriztioan/bui.git          |\n"
+            << "|   " << asc_time
+            << "                                                  |\n"
+            << "|                                                              "
+               "               |\n"
+            << "+--------------------------------------------------------------"
+               "---------------+\001\033[0;0m\n\n"
+            << "Memory status : RAM     : total "
             << human_readable(s_info.totalram) << " / free "
             << human_readable(s_info.freeram) << " / shared "
-            << human_readable(s_info.sharedram) << std::endl
-            << "                   BUFFERS : total "
-            << human_readable(s_info.bufferram) << std::endl
-            << "                   SWAP    : total "
+            << human_readable(s_info.sharedram)
+            << "\n                BUFFERS : total "
+            << human_readable(s_info.bufferram)
+            << "\n                SWAP    : total "
             << human_readable(s_info.totalswap) << " / free "
-            << human_readable(s_info.freeswap) << std::endl
-            << "Interface loaded" << std::endl
-            << std::endl
-            << "Welcome" << user << " type a command or try help or list"
-            << std::endl;
+            << human_readable(s_info.freeswap) << "\n\nInterface loaded\n\n"
+            << "Welcome" << user
+            << ", type a command or try 'help' or 'list'\n";
 }
