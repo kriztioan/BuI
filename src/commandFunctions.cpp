@@ -88,8 +88,8 @@ void doexit(std::queue<std::string> &parameter) {
 
   history_truncate_file(env.history_file, env.history_lines);
 
-  struct mallinfo memory;
-  memory = mallinfo();
+  struct mallinfo2 memory;
+  memory = mallinfo2();
 
   std::cout << "Allocated memory: total " << human_readable(memory.uordblks)
             << " / free " << human_readable(memory.fordblks) << '\n';
