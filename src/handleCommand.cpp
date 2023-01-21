@@ -38,13 +38,19 @@ void handleCommand(COM *com) {
   if (read_history(env.history_file) != 0)
     perror("read_history");
 
-  char *line;
-  while ((line = readline(env.prompt))) {
-    if (*line)
+  char *line = NULL;
+  while (true) {
+    if (line) {
+      free(line);
+      line = NULL;
+    }
+    line = readline(env.prompt);
+    if (line && *line) {
       add_history(line);
-    while (!parameter.empty())
-      parameter.pop();
-    com[interpedCommand(com, std::string(line), parameter)].function(parameter);
-    free(line);
+      while (!parameter.empty())
+        parameter.pop();
+      com[interpedCommand(com, std::string(line), parameter)].function(
+          parameter);
+    }
   }
 }

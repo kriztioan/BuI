@@ -3,7 +3,7 @@
 
 ## Description
 
-`BuI` is a command line user interface to [CSDUST3](https://mendeley.figshare.com/articles/dataset/CSDUST3_A_radiation_transport_code_for_a_dusty_medium_with_1-d_planar_spherical_or_cylindrical_geometry/11330666/1). It is written in `C/C++`. `BuI` offers an interactive terminal environment for constructing the input, run, and evaluating the output of [CSDUST3](https://mendeley.figshare.com/articles/dataset/CSDUST3_A_radiation_transport_code_for_a_dusty_medium_with_1-d_planar_spherical_or_cylindrical_geometry/11330666/1). It does this by offering simple commands that are able to generate the necessary input, running [CSDUST3](https://mendeley.figshare.com/articles/dataset/CSDUST3_A_radiation_transport_code_for_a_dusty_medium_with_1-d_planar_spherical_or_cylindrical_geometry/11330666/1) from within `BuI`, and generating figures from its output using the [CCPGPLOT](https://github.com/kriztioan/CCPGPLOT) `C++`plotting library. `BuI` has some rudimentary support for scripting.
+`BuI` is a command line user interface to [CSDUST3](https://mendeley.figshare.com/articles/dataset/CSDUST3_A_radiation_transport_code_for_a_dusty_medium_with_1-d_planar_spherical_or_cylindrical_geometry/11330666/1). It is written in `C/C++`. `BuI` offers an interactive terminal environment for constructing the input, run, and evaluating the output of [CSDUST3](https://mendeley.figshare.com/articles/dataset/CSDUST3_A_radiation_transport_code_for_a_dusty_medium_with_1-d_planar_spherical_or_cylindrical_geometry/11330666/1). It does this by offering simple commands that are able to generate the necessary input, running [CSDUST3](https://mendeley.figshare.com/articles/dataset/CSDUST3_A_radiation_transport_code_for_a_dusty_medium_with_1-d_planar_spherical_or_cylindrical_geometry/11330666/1) from within `BuI`, and generating figures from its output using the [CCPGPLOT](https://github.com/kriztioan/CCPGPLOT) `C++`plotting library. `BuI` has rudimentary support for scripting.
 
 A research report that describes and makes use of `BuI` can be found in the  [docs](docs/).
 
@@ -62,9 +62,7 @@ Lastly, [share/bui/sm](share/bui/sm) contains a number of [SuperMongo](https://w
 
 ## Notes
 
-1. `BuI` is near feature complete.
-2. `BuI` runs on both `Linux` and `MacOS`.
-3. Due to a bug in `readline`/`history`, on `Ubuntu` `BuI` segfaults when using command line history search.
+`. `BuI` runs on both `Linux` and `MacOS`.
 
 ## BSD-3 License
 

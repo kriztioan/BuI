@@ -5,7 +5,7 @@ OBJ_FILES:=$(patsubst %.cpp,%.o,$(CPP_FILES))
 CCPGPLOT_DIR=$(SRC_DIR)/CCPGPLOT
 CCPGPLOT_LIB:=$(CCPGPLOT_DIR)/libccpgplot.a
 CPPFLAGS:=-Wno-write-strings -I/opt/X11/include
-LIBS:=-lpgplot -lcpgplot -lhistory -lreadline -L/opt/X11/lib -lX11
+LIBS:=-lreadline -L/opt/X11/lib -lX11 -lX11 -lpgplot -lcpgplot
 
 $(PROG): $(OBJ_FILES) $(CCPGPLOT_LIB)
 	$(CXX) -o $(PROG) $(OBJ_FILES) $(CCPGPLOT_LIB) $(LIBS)

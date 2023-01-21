@@ -42,7 +42,7 @@ void help(std::queue<std::string> &parameter) {
       if (strcmp(com[i].name, name) == 0) {
         std::ifstream ifstr(env.help_file, std::ios::in);
         ifstr.seekg(com[i].offset, std::ios::beg);
-        std::cout << std::endl << "                    Command " << com[i].name;
+        std::cout <<  "\n                    Command " << com[i].name;
         char character = '\n';
         do {
           std::cout << character;
@@ -69,14 +69,11 @@ void help(std::queue<std::string> &parameter) {
 }
 
 void list_commands(std::queue<std::string> &parameter) {
-  std::cout << std::endl
-            << " For a specific topic try typing HELP <command> where command "
-               "is one of the following:"
-            << std::endl
-            << std::endl;
+  std::cout << "\n For a specific topic try typing HELP <command> where command "
+               "is one of the following:\n\n";
   for (int i = 0; i < N_COMMANDS; i++)
     std::cout << "  " << std::setw(12) << std::setiosflags(std::ios::left)
-              << com[i].name << com[i].description << std::endl;
+              << com[i].name << com[i].description << '\n';
   std::cout << std::endl;
 }
 
@@ -95,7 +92,7 @@ void doexit(std::queue<std::string> &parameter) {
   memory = mallinfo();
 
   std::cout << "Allocated memory: total " << human_readable(memory.uordblks)
-            << " / free " << human_readable(memory.fordblks) << std::endl;
+            << " / free " << human_readable(memory.fordblks) << '\n';
 
   message(FREEMEMORY);
   delete[] io.input_file;
@@ -133,7 +130,7 @@ void doexit(std::queue<std::string> &parameter) {
   stm = *localtime(&t_delta);
   std::cout << "Total time used by processor " << std::setprecision(2)
             << std::setiosflags(std::ios::fixed)
-            << float(clock()) / float(CLOCKS_PER_SEC) << " seconds" << std::endl
+            << float(clock()) / float(CLOCKS_PER_SEC) << " seconds\n"
             << "Total uptime " << stm.tm_hour - 1 << " hours " << stm.tm_min
             << " minutes " << stm.tm_sec << " seconds" << std::endl;
   exit(0);
@@ -176,15 +173,15 @@ void show(std::queue<std::string> &parameter) {
     std::cout.precision(3);
     strToLower(parameter.front());
     if (parameter.front() == "spatialgrid") {
-      std::cout << "Spatial Grid:" << std::endl << std::endl;
+      std::cout << "Spatial Grid:\n\n";
       for (int idx = 1; idx < 101; idx++) {
         std::cout << mod[0].spatialgrid[idx - 1] << "\t";
         if (idx % 5 == 0)
-          std::cout << std::endl;
+          std::cout << '\n';
       }
       std::cout << std::endl;
     } else if (parameter.front() == "wavelengthgrid") {
-      std::cout << "Wavelength Grid:" << std::endl << std::endl;
+      std::cout << "Wavelength Grid:\n\n";
       for (int idx = 1; idx < atoi(mod[0].parameters[NFD][1]) + 1; idx++) {
         std::cout << mod[0].wavelengthgrid[idx - 1] << "\t";
         if (idx % 5 == 0)
@@ -192,7 +189,7 @@ void show(std::queue<std::string> &parameter) {
       }
       std::cout << std::endl;
     } else if (parameter.front() == "irf") {
-      std::cout << "Interstellar Radiation Field:" << std::endl << std::endl;
+      std::cout << "Interstellar Radiation Field:\n\n";
       for (int idx = 1; idx < atoi(mod[0].parameters[NFD][1]) + 1; idx++) {
         std::cout << mod[0].interstellar[idx - 1] << "\t";
         if (idx % 5 == 0)
@@ -200,7 +197,7 @@ void show(std::queue<std::string> &parameter) {
       }
       std::cout << std::endl;
     } else if (parameter.front() == "conv") {
-      std::cout << "Convolution Grid" << std::endl << std::endl;
+      std::cout << "Convolution Grid\n\n";
       for (int idx = 1; idx < atoi(mod[0].parameters[NFD][1]) + 1; idx++) {
         std::cout << mod[0].convolution[idx - 1] << "\t";
         if (idx % 5 == 0)
@@ -208,10 +205,10 @@ void show(std::queue<std::string> &parameter) {
       }
       std::cout << std::endl;
     } else if (parameter.front() == "dust") {
-      std::cout << "Dust Model Parameters" << std::endl << std::endl;
+      std::cout << "Dust Model Parameters\n\n";
       for (int idx = 0; idx < atoi(mod[0].parameters[IMIX][1]); idx++) {
         if (atoi(mod[0].parameters[IMIX][1]) > 1)
-          std::cout << "Model " << idx + 1 << std::endl << std::endl;
+          std::cout << "Model " << idx + 1 << "\n\n";
 
         std::cout << "Grain Core Composition " << mod[0].dustname[idx][0]
                   << " radius " << mod[0].radii[idx][0]

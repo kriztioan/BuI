@@ -13,7 +13,7 @@
 #define LANGUAGE_FILE "share/bui/language.lan"
 #define INPUT_FILE "share/bui/default/default.in"
 
-ENV env = {.version = "0.9",
+ENV env = {.version = "1.0",
            .year = {0},
            .help_file = NULL,
            .help_idx = "bui.idx",
