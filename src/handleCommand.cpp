@@ -19,12 +19,21 @@ void handleCommand(COM *com) {
   std::queue<std::string> parameter;
 
   if (env.script != NULL) {
+    std::cout << "Running script '" << env.script << "'." << std::endl;
     std::ifstream script(env.script, std::ios::in);
     if (script.good()) {
+      int line_number = 0;
       std::string line;
       while (std::getline(script, line)) {
+        ++line_number;
         if (line.length() > 0 && line.at(0) != '#') {
-          com[interpedCommand(com, line, parameter)].function(parameter);
+          if (com[interpedCommand(com, line, parameter)].function(parameter) !=
+              0) {
+            std::cerr << "Error while running '" << env.script
+                      << "'. Stopped.\n\t" << line_number << ": \001\033[31;1m"
+                      << line << "\001\033[0;0m" << std::endl;
+            break;
+          }
           while (!parameter.empty())
             parameter.pop();
         }

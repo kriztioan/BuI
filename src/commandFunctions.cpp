@@ -23,7 +23,7 @@ extern COM *com;
 extern MES *mes;
 extern MOD *mod;
 
-void shell(std::queue<std::string> &parameter) {
+int shell(std::queue<std::string> &parameter) {
   std::string command;
   if (!parameter.empty()) {
     while (parameter.size() != 0) {
@@ -33,16 +33,18 @@ void shell(std::queue<std::string> &parameter) {
     system(command.c_str());
   } else
     std::cout << "Give command" << std::endl;
+
+  return 0;
 }
 
-void help(std::queue<std::string> &parameter) {
+int help(std::queue<std::string> &parameter) {
   if (!parameter.empty()) {
     const char *name = parameter.front().c_str();
     for (int i = 0; i < N_COMMANDS; i++) {
       if (strcmp(com[i].name, name) == 0) {
         std::ifstream ifstr(env.help_file, std::ios::in);
         ifstr.seekg(com[i].offset, std::ios::beg);
-        std::cout <<  "\n                    Command " << com[i].name;
+        std::cout << "\n                    Command " << com[i].name;
         char character = '\n';
         do {
           std::cout << character;
@@ -50,11 +52,11 @@ void help(std::queue<std::string> &parameter) {
         } while (character != '[' && ifstr.good());
 
         ifstr.close();
-        return;
+        return 0;
       }
     }
     std::cout << "No help available for " << name << std::endl;
-    return;
+    return 1;
   }
 
   std::ifstream ifstr(env.help_file, std::ios::in);
@@ -65,19 +67,22 @@ void help(std::queue<std::string> &parameter) {
     ifstr.get(character);
   } while (character != '[' && ifstr.good());
   ifstr.close();
-  list_commands(parameter);
+  return list_commands(parameter);
 }
 
-void list_commands(std::queue<std::string> &parameter) {
-  std::cout << "\n For a specific topic try typing HELP <command> where command "
-               "is one of the following:\n\n";
+int list_commands(std::queue<std::string> &parameter) {
+  std::cout
+      << "\n For a specific topic try typing HELP <command> where command "
+         "is one of the following:\n\n";
   for (int i = 0; i < N_COMMANDS; i++)
     std::cout << "  " << std::setw(12) << std::setiosflags(std::ios::left)
               << com[i].name << com[i].description << '\n';
   std::cout << std::endl;
+
+  return 0;
 }
 
-void doexit(std::queue<std::string> &parameter) {
+int doexit(std::queue<std::string> &parameter) {
   message(ONEXIT);
 
   message(ENDPGPLOT);
@@ -134,13 +139,15 @@ void doexit(std::queue<std::string> &parameter) {
             << "Total uptime " << stm.tm_hour - 1 << " hours " << stm.tm_min
             << " minutes " << stm.tm_sec << " seconds" << std::endl;
   exit(0);
+
+  return 0;
 }
 
-void display(std::queue<std::string> &parameter) {
-  createOutput(BUI_PLOT, parameter);
+int display(std::queue<std::string> &parameter) {
+  return createOutput(BUI_PLOT, parameter);
 }
 
-void create(std::queue<std::string> &parameter) {
+int create(std::queue<std::string> &parameter) {
   if (!parameter.empty()) {
     strToLower(parameter.front());
     if (parameter.front() == "radialgrid")
@@ -154,20 +161,29 @@ void create(std::queue<std::string> &parameter) {
     else if (parameter.front() == "dust")
       createDust();
     else if (parameter.front() == "all") {
-      createRadialGrid();
-      createWavelengthGrid();
-      createIrf();
-      createDust();
-      createConv();
+      int err = createRadialGrid();
+      if (err != 0)
+        return err;
+      err = createWavelengthGrid();
+      if (err != 0)
+        return err;
+      err = createIrf();
+      if (err != 0)
+        return err;
+      err = createDust();
+      if (err != 0)
+        return err;
+      return createConv();
     } else
       std::cout << "Give parameter RADIALGRID WAVELENGTHGRID IRF CONV DUST ALL"
                 << std::endl;
   } else
     std::cout << "Give parameter RADIALGRID WAVELENGTHGRID IRF CONV DUST ALL"
               << std::endl;
+  return 1;
 }
 
-void show(std::queue<std::string> &parameter) {
+int show(std::queue<std::string> &parameter) {
   if (!parameter.empty()) {
     std::cout.setf(std::ios::scientific);
     std::cout.precision(3);
@@ -329,18 +345,23 @@ void show(std::queue<std::string> &parameter) {
             << std::endl
             << std::setw(55) << std::setiosflags(std::ios::left) << "Output is "
             << (atoi(mod[i].parameters[IOUT][1]) == 0 ? "simple" : "detailed")
+            << std::endl
             << std::endl;
+        return 0;
       }
     } else
       std::cout << "Give argument: SPATIALGRID WAVELENGTHGRID IRF CONV DUST "
-                   "PARAMETERS";
+                   "PARAMETERS"
+                << std::endl;
   } else
     std::cout
-        << "Give argument: SPATIALGRID WAVELENGTHGRID IRF CONV DUST PARAMETERS";
-  std::cout << std::endl;
+        << "Give argument: SPATIALGRID WAVELENGTHGRID IRF CONV DUST PARAMETERS"
+        << std::endl;
+
+  return 1;
 }
 
-void info(std::queue<std::string> &parameter) {
+int info(std::queue<std::string> &parameter) {
   std::cout << "Info\n"
             << std::endl
             << "Inputfile\t\t" << io.input_file << std::endl
@@ -348,23 +369,25 @@ void info(std::queue<std::string> &parameter) {
             << "Plotfile\t\t" << io.plot_file << std::endl
             << "Datafile\t\t" << io.data_file << std::endl
             << std::endl;
+  return 0;
 }
 
-void save(std::queue<std::string> &parameter) {
-  createOutput(FILENAME, parameter);
+int save(std::queue<std::string> &parameter) {
+  return createOutput(FILENAME, parameter);
 }
 
-void return_func(std::queue<std::string> &parameter) {}
+int return_func(std::queue<std::string> &parameter) { return 0; }
 
-void unknown(std::queue<std::string> &parameter) {
+int unknown(std::queue<std::string> &parameter) {
   std::cout << "Unknown command" << std::endl;
+  return 1;
 }
 
-void run(std::queue<std::string> &parameter) {
+int run(std::queue<std::string> &parameter) {
   std::string command;
   if (getenv("CSDUST3") == NULL) {
     std::cout << "CSDUST3 enviornment variable not set" << std::endl;
-    return;
+    return 1;
   } else
     command = getenv("CSDUST3");
 
@@ -413,9 +436,10 @@ void run(std::queue<std::string> &parameter) {
         << "Error while running model, check outputfile for further details"
         << std::endl;*/
   std::cout << "completed" << std::endl;
+  return 0;
 }
 
-void set(std::queue<std::string> &parameter) {
+int set(std::queue<std::string> &parameter) {
   if (parameter.size() > 1) {
     strToLower(parameter.front());
     if (parameter.front() == "output") {
@@ -444,13 +468,14 @@ void set(std::queue<std::string> &parameter) {
   } else
     std::cout << "Give argument: INPUT OUTPUT PLOT DATA [filename]"
               << std::endl;
+  return 0;
 }
 
-void writeplot(std::queue<std::string> &parameter) {
-  createOutput(PLOT2FILE, parameter);
+int writeplot(std::queue<std::string> &parameter) {
+  return createOutput(PLOT2FILE, parameter);
 }
 
-void contour(std::queue<std::string> &parameter) {
+int contour(std::queue<std::string> &parameter) {
 
   std::ifstream iFile(io.output_file, std::ios::in);
   if (iFile.good()) {
@@ -589,11 +614,15 @@ void contour(std::queue<std::string> &parameter) {
     cpgclos();
     cpgslct(win.graphicsID);
     cpgask(false);
+
+    return 0;
   } else
     std::cout << "Unable to open output file" << std::endl;
+
+  return 1;
 }
 
-void graph(std::queue<std::string> &parameter) {
+int graph(std::queue<std::string> &parameter) {
   if (parameter.size() > 1) {
     strToLower(parameter.front());
     if (parameter.front() == "symbol") {
@@ -611,12 +640,14 @@ void graph(std::queue<std::string> &parameter) {
     } else
       std::cout << "Give parameter SYMBOL COLOR LINEWEIGHT TYPE <VALUE>"
                 << std::endl;
+    return 1;
   } else
     std::cout << "Give parameter SYMBOL COLOR LINEWEIGHT TYPE <VALUE>"
               << std::endl;
+  return 0;
 }
 
-void window(std::queue<std::string> &parameter) {
+int window(std::queue<std::string> &parameter) {
 
   if (parameter.size() > 1) {
     strToLower(parameter.front());
@@ -625,15 +656,18 @@ void window(std::queue<std::string> &parameter) {
       win.windowSize = atof(parameter.front().c_str());
       cpgpap(win.windowSize, 0.9);
       cpgpage();
+      return 0;
     } else
       std::cout << "Give parameter SIZE <VALUE>" << std::endl;
   } else
     std::cout << "Give parameter SIZE <VALUE>" << std::endl;
+
+  return 1;
 }
 
 // Auxillary Functions
 
-void createOutput(device destination, std::queue<std::string> &parameter) {
+int createOutput(device destination, std::queue<std::string> &parameter) {
 
   if (!parameter.empty()) {
     std::ifstream iFile(io.output_file, std::ios::in);
@@ -1105,24 +1139,28 @@ void createOutput(device destination, std::queue<std::string> &parameter) {
           for (int i = 0; i < atoi(mod[0].parameters[NFD][1]); i++)
             mod[0].interstellar[i] = pow(10, mod[0].interstellar[i]);
         }
-
       } else {
         std::cout << "Give argument: IRF SPEC EMERG RHOD TAU0F AVFLUX COOLD "
                      "HEATD TD ABUNDI# TDI# COOLDI# HEATDI# (LOGX / LOGY)"
                   << std::endl;
+        return 1;
       }
     } else {
       std::cout << "Outputfile does not exist" << std::endl;
+      return 1;
     }
   } else {
     std::cout << "Give argument: IRF SPEC EMERG RHOD TAU0F AVFLUX COOLD HEATD "
                  "TD ABUNDI# TDI# COOLDI# HEATD# (LOGX / LOGY)"
               << std::endl;
+    return 1;
   }
+
+  return 0;
 }
 
-void read(std::ifstream &ifstr, float array[][100], int Nrow, int Ncol,
-          char *delimeter) {
+int read(std::ifstream &ifstr, float array[][100], int Nrow, int Ncol,
+         char *delimeter) {
   std::string dummy;
   while ((dummy.find(delimeter) == std::string::npos) && (ifstr.good())) {
     std::getline(ifstr, dummy);
@@ -1133,9 +1171,10 @@ void read(std::ifstream &ifstr, float array[][100], int Nrow, int Ncol,
       ifstr >> array[collum][row];
     }
   }
+  return 0;
 }
 
-void print(float Xarray[], float Yarray[], int size, bool file) {
+int print(float Xarray[], float Yarray[], int size, bool file) {
 
   if (file) {
     std::cout << "Writting to " << io.data_file << std::endl;
@@ -1150,10 +1189,11 @@ void print(float Xarray[], float Yarray[], int size, bool file) {
       std::cout << Xarray[idx] << "\t" << Yarray[idx] << std::endl;
     }
   }
+  return 0;
 }
 
-void plot(float Xarray[], float Yarray[], int size, char *Xlabel, char *Ylabel,
-          char *toplabel, int color, bool file) {
+int plot(float Xarray[], float Yarray[], int size, char *Xlabel, char *Ylabel,
+         char *toplabel, int color, bool file) {
 
   ccdraw mydraw;
   ccplot myplot;
@@ -1179,9 +1219,11 @@ void plot(float Xarray[], float Yarray[], int size, char *Xlabel, char *Ylabel,
   mydraw.retain();
   mydraw.add(myplot);
   mydraw.paint();
+
+  return 0;
 }
 
-void limits(float *array, int size, float &min, float &max) {
+int limits(float *array, int size, float &min, float &max) {
   min = array[0];
   max = array[0];
 
@@ -1201,15 +1243,19 @@ void limits(float *array, int size, float &min, float &max) {
 
   min = min - ((max - min) / 20);
   max = max + ((max - min) / 20);
+
+  return 0;
 }
 
-void strToLower(std::string &toUpper) {
+int strToLower(std::string &toUpper) {
   for (int pos = 0; pos < toUpper.size(); pos++)
     toUpper.at(pos) = tolower(toUpper.c_str()[pos]);
+
+  return 0;
 }
 
-void setLevels(float array[][10], int nRows, int nCollumns, float levels[],
-               float fLevels, float &min, float &max) {
+int setLevels(float array[][10], int nRows, int nCollumns, float levels[],
+              float fLevels, float &min, float &max) {
   min = array[0][0];
   max = array[0][0];
 
@@ -1229,19 +1275,38 @@ void setLevels(float array[][10], int nRows, int nCollumns, float levels[],
     min = min * 1.1;
   for (int idx = 0; idx < fLevels; idx++)
     levels[idx] = (min + idx * (max - min) / fLevels);
+
+  return 0;
 }
 
-void toLog(float array[]) {
+int toLog(float array[]) {
   for (int idx = 0; idx < 100; idx++)
     array[idx] = log10(array[idx]);
+
+  return 0;
 }
 
-void createRadialGrid() { std::cout << "Not implemented" << std::endl; }
+int createRadialGrid() {
+  std::cout << "Not implemented" << std::endl;
+  return 1;
+}
 
-void createWavelengthGrid() { std::cout << "Not implemented" << std::endl; }
+int createWavelengthGrid() {
+  std::cout << "Not implemented" << std::endl;
+  return 1;
+}
 
-void createConv() { std::cout << "Not implemented" << std::endl; }
+int createConv() {
+  std::cout << "Not implemented" << std::endl;
+  return 1;
+}
 
-void createIrf() { std::cout << "Not implemented" << std::endl; }
+int createIrf() {
+  std::cout << "Not implemented" << std::endl;
+  return 1;
+}
 
-void createDust() { std::cout << "Not implemented" << std::endl; }
+int createDust() {
+  std::cout << "Not implemented" << std::endl;
+  return 1;
+}

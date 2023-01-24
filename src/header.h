@@ -97,7 +97,7 @@ struct COM {
 
   long offset;
 
-  void (*function)(std::queue<std::string> &parameter);
+  int (*function)(std::queue<std::string> &parameter);
 };
 
 typedef enum {

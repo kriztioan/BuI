@@ -12,43 +12,43 @@
 
 typedef enum { BUI_PLOT, FILENAME, PLOT2FILE } device;
 
-void doexit(std::queue<std::string> &parameter);
-void list_commands(std::queue<std::string> &parameter);
-void help(std::queue<std::string> &parameter);
-void save(std::queue<std::string> &parameter);
-void display(std::queue<std::string> &parameter);
-void writeplot(std::queue<std::string> &parameter);
-void info(std::queue<std::string> &parameter);
-void contour(std::queue<std::string> &parameter);
-void return_func(std::queue<std::string> &parameter);
-void unknown(std::queue<std::string> &parameter);
-void show(std::queue<std::string> &parameter);
-void create(std::queue<std::string> &parameter);
-void shell(std::queue<std::string> &parameter);
-void window(std::queue<std::string> &parameter);
-void graph(std::queue<std::string> &parameter);
+int doexit(std::queue<std::string> &parameter);
+int list_commands(std::queue<std::string> &parameter);
+int help(std::queue<std::string> &parameter);
+int save(std::queue<std::string> &parameter);
+int display(std::queue<std::string> &parameter);
+int writeplot(std::queue<std::string> &parameter);
+int info(std::queue<std::string> &parameter);
+int contour(std::queue<std::string> &parameter);
+int return_func(std::queue<std::string> &parameter);
+int unknown(std::queue<std::string> &parameter);
+int show(std::queue<std::string> &parameter);
+int create(std::queue<std::string> &parameter);
+int shell(std::queue<std::string> &parameter);
+int window(std::queue<std::string> &parameter);
+int graph(std::queue<std::string> &parameter);
 
-void set(std::queue<std::string> &parameter);
-void run(std::queue<std::string> &parameter);
+int set(std::queue<std::string> &parameter);
+int run(std::queue<std::string> &parameter);
 
-void read(std::ifstream &ifstr, float array[][100], int Nrows, int Ncol,
+int read(std::ifstream &ifstr, float array[][100], int Nrows, int Ncol,
           char *delimeter);
-void limits(float *array, int size, float &min, float &max);
-void strToLower(std::string &toUpper);
+int limits(float *array, int size, float &min, float &max);
+int strToLower(std::string &toUpper);
 
-void print(float Xarray[], float Yarray[], int size, bool file = false);
-void plot(float Xarray[], float Yarray[], int size, char *Xlabel, char *Ylabel,
+int print(float Xarray[], float Yarray[], int size, bool file = false);
+int plot(float Xarray[], float Yarray[], int size, char *Xlabel, char *Ylabel,
           char *toplabel, int color = 1, bool file = false);
-void createOutput(device destination, std::queue<std::string> &parameter);
+int createOutput(device destination, std::queue<std::string> &parameter);
 
-void setLevels(float array[][10], int nRows, int nCollumns, float levels[],
+int setLevels(float array[][10], int nRows, int nCollumns, float levels[],
                float fLevels, float &min, float &max);
-void toLog(float array[]);
+int toLog(float array[]);
 
-void createRadialGrid();
-void createWavelengthGrid();
-void createDust();
-void createConv();
-void createIrf();
+int createRadialGrid();
+int createWavelengthGrid();
+int createDust();
+int createConv();
+int createIrf();
 
 #endif // End of COMMANDFUNCTIONS_H_
