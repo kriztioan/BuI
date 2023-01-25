@@ -9,6 +9,12 @@
 
 #include "header.h"
 
+
+extern "C" {
+#include <readline/history.h>
+#include <readline/readline.h>
+}
+
 #define HELP_FILE "share/bui/bui.hlp"
 #define LANGUAGE_FILE "share/bui/language.lan"
 #define INPUT_FILE "share/bui/default/default.in"

@@ -9,7 +9,7 @@
 
 #include "human_readable.h"
 
-std::string human_readable(int bytes) {
+std::string human_readable(size_t bytes) {
 
   const char *units[] = {" bytes", " kiB", " MiB", " GiB", " TiB"};
 

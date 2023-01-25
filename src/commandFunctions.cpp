@@ -11,8 +11,8 @@
 #include "human_readable.h"
 #include <cstdio>
 extern "C" {
-#include <malloc.h>
 #include <readline/history.h>
+#include <sys/resource.h>
 }
 
 extern ENV env;
@@ -93,11 +93,9 @@ int doexit(std::queue<std::string> &parameter) {
 
   history_truncate_file(env.history_file, env.history_lines);
 
-  struct mallinfo2 memory;
-  memory = mallinfo2();
-
-  std::cout << "Allocated memory: total " << human_readable(memory.uordblks)
-            << " / free " << human_readable(memory.fordblks) << '\n';
+  struct rusage ru;
+  getrusage(RUSAGE_SELF, &ru);
+  std::cout << "Memory used: " << human_readable(ru.ru_maxrss) << "\n";
 
   message(FREEMEMORY);
   delete[] io.input_file;
@@ -130,14 +128,13 @@ int doexit(std::queue<std::string> &parameter) {
   free(env.help_file);
   free(env.language_file);
 
-  struct tm stm;
   time_t t_delta = time(NULL) - env.t_start;
-  stm = *localtime(&t_delta);
-  std::cout << "Total time used by processor " << std::setprecision(2)
+  std::cout << "Total CPU time: " << std::setprecision(2)
             << std::setiosflags(std::ios::fixed)
             << float(clock()) / float(CLOCKS_PER_SEC) << " seconds\n"
-            << "Total uptime " << stm.tm_hour - 1 << " hours " << stm.tm_min
-            << " minutes " << stm.tm_sec << " seconds" << std::endl;
+            << "Total run time: " << (t_delta / 3600) << " hours "
+            << ((t_delta % 3600) / 60) << " minutes "
+            << (((t_delta % 3600) % 60)) << " seconds" << std::endl;
   exit(0);
 
   return 0;

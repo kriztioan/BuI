@@ -11,4 +11,4 @@
 #include <sstream>
 #include <string>
 
-std::string human_readable(int bytes);
+std::string human_readable(size_t bytes);

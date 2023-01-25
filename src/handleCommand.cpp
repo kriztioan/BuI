@@ -15,6 +15,38 @@ extern "C" {
 }
 extern ENV env;
 
+COM *rl_com;
+
+char *com_generator(const char *text, int state) {
+
+  static int list_index, len;
+
+  char *name;
+
+  if (!state) {
+    list_index = 0;
+    len = strlen(text);
+  }
+
+  while (list_index < N_COMMANDS) {
+    name = rl_com[list_index++].name;
+    if (strncmp(name, text, len) == 0) {
+      return (strdup(name));
+    }
+  }
+
+  return NULL;
+}
+
+char **bui_completion(const char *text, int start, int end) {
+
+  char **matches = NULL;
+  if (start == 0)
+    matches = rl_completion_matches(text, com_generator);
+
+  return matches;
+}
+
 void handleCommand(COM *com) {
   std::queue<std::string> parameter;
 
@@ -41,6 +73,12 @@ void handleCommand(COM *com) {
     } else
       std::cerr << "Failed to open script '" << env.script << "'" << std::endl;
   }
+
+  rl_com = com;
+
+  rl_readline_name = "BuI";
+
+  rl_attempted_completion_function = (rl_completion_func_t *)bui_completion;
 
   using_history();
 
