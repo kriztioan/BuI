@@ -15,7 +15,7 @@ bool loadLanguageCommands(COM *com) {
   std::ifstream index(env.language_idx, std::ios::in),
       data(env.language_file, std::ios::in);
 
-  std::string compare, name, description;
+  std::string compare, name, description, arguments;
   char character;
 
   do {
@@ -81,6 +81,19 @@ bool loadLanguageCommands(COM *com) {
         return (false);
       description += character;
     } while (character != '}');
+    arguments.erase();
+    while (character != '{') {
+      data.get(character);
+      if (character == '>' || character == '}')
+        return (false);
+    }
+    arguments += character;
+    do {
+      data.get(character);
+      if (data.eof() || data.fail() || character == '{')
+        return (false);
+      arguments += character;
+    } while (character != '}');
 
     command key = interpedKey(const_cast<char *>(compare.c_str()));
     com[key].key = key;
@@ -90,5 +103,9 @@ bool loadLanguageCommands(COM *com) {
     com[key].description = strcpy(
         new char[description.substr(1, description.length() - 2).length() + 1],
         description.substr(1, description.length() - 2).c_str());
+
+    com[key].arguments = strcpy(
+        new char[arguments.substr(1, arguments.length() - 2).length() + 1],
+        arguments.substr(1, arguments.length() - 2).c_str());
   }
 }

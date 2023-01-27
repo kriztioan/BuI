@@ -119,6 +119,7 @@ int doexit(std::queue<std::string> &parameter) {
   for (int i = 0; i < N_COMMANDS; i++) {
     delete com[i].name;
     delete com[i].description;
+    delete com[i].arguments;
   }
   delete com;
   for (int i = 0; i < N_MESSAGES; i++)

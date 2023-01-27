@@ -92,6 +92,7 @@ typedef enum {
 struct COM {
   char *name;
   char *description;
+  char *arguments;
 
   command key;
 

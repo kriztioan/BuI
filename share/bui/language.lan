@@ -1,52 +1,52 @@
 [COMMANDS]
 
-  <RUN>		   {run}      {runs simulation}
-  <SET>		   {set}      {sets and initializes files}
-  <LIST>           {list}     {this list}
-  <EXIT>           {exit}     {exits BuI}
-  <SAVE>           {save}     {saves results specified results to datafile}
-  <INFO>           {settings} {gives information on program settings}
-  <DISPLAY>        {plot}     {displays plot of data}
-  <PLOT>	   {hardcopy} {plot graph to PostScript file}
-  <CONTOUR>        {cont}     {displays contour levels for each frequency}
-  <UNKNOWN>        {unknown}  {internal BuI command}
-  <RETURN>         {return}   {internal BuI command}
-  <HELP>           {help}     {BuI help routine}
-  <SHOW>           {model}    {gives model parameters}
-  <SHELL>          {!}        {execute shell command}
-  <CREATE>	   {new}      {change model parameters}
-  <BUI_WINDOW>	   {window}   {change plot window layout}
-  <GRAPH>          {graph}    {change graph style}
+  <RUN>            {run}      {runs simulation}                               {}
+  <SET>            {set}      {sets and initializes files}                    {INPUT OUTPUT PLOT DATA}
+  <LIST>           {list}     {this list}                                     {}
+  <EXIT>           {exit}     {exits BuI}                                     {}
+  <SAVE>           {save}     {saves results specified results to datafile}   {IRF SPEC EMERG RHOD TAU0F AVFLUX COOLD HEATD TD ABUNDI TDI COOLDI HEATD LOGX LOGY}
+  <INFO>           {settings} {gives information on program settings}         {}
+  <DISPLAY>        {plot}     {displays plot of data}                         {IRF SPEC EMERG RHOD TAU0F AVFLUX COOLD HEATD TD ABUNDI TDI COOLDI HEATD LOGX LOGY}
+  <PLOT>           {hardcopy} {plot graph to PostScript file}                 {IRF SPEC EMERG RHOD TAU0F AVFLUX COOLD HEATD TD ABUNDI TDI COOLDI HEATD LOGX LOGY}
+  <CONTOUR>        {cont}     {displays contour levels for each frequency}    {}
+  <UNKNOWN>        {unknown}  {internal BuI command}                          {}
+  <RETURN>         {return}   {internal BuI command}                          {}
+  <HELP>           {help}     {BuI help routine}                              {}
+  <SHOW>           {model}    {gives model parameters}                        {SPATIALGRID WAVELENGTHGRID IRF CONV DUST PARAMETERS}
+  <SHELL>          {!}        {execute shell command}                         {}
+  <CREATE>         {new}      {change model parameters}                       {RADIALGRID WAVELENGTHGRID IRF CONV DUST ALL}
+  <BUI_WINDOW>	   {window}   {change plot window layout}                     {SIZE}
+  <GRAPH>          {graph}    {change graph style}                            {SYMBOL COLOR LINEWEIGHT TYPE}
 
 [MESSAGES]
 
   <STARTUP>                     {Starting up BuI}
   <SETMEMORYHANDLER>            {Memory handler set}
-  <SETENVIORMENTCONSTANTS>	{Envioronment constants set}
-  <INITIALIZEDLANGUAGE>		{Language initialized}
+  <SETENVIORMENTCONSTANTS>      {Envioronment constants set}
+  <INITIALIZEDLANGUAGE>         {Language initialized}
 
-  <INITIALIZEHELP>		{Initializing help}
-  <FAILINITIALIZEHELP>		{Failed initializing help... Aborting}
-  <LOADEDHELP>			{Loaded help}
-  <FAILEDLOADHELP>		{Failed loading help... Aborting}
-  <LOADEDCOMMANDS>		{Commands loaded}
-  <FAILEDLOADCOMMANDS>		{Failed loading commands... Aborting}
+  <INITIALIZEHELP>              {Initializing help}
+  <FAILINITIALIZEHELP>          {Failed initializing help... Aborting}
+  <LOADEDHELP>                  {Loaded help}
+  <FAILEDLOADHELP>              {Failed loading help... Aborting}
+  <LOADEDCOMMANDS>              {Commands loaded}
+  <FAILEDLOADCOMMANDS>          {Failed loading commands... Aborting}
 
-  <FAILEDINPUTFILE>		{Failed reading input file... Aborting}
-  <INITIALIZEDHELP>		{Help initialized}
+  <FAILEDINPUTFILE>	             {Failed reading input file... Aborting}
+  <INITIALIZEDHELP>              {Help initialized}
 
-  <INITIALIZEPGPLOT>            {Initializing PGPLOT}
-  <INITIALIZEDPGPLOT>           {PGPLOT initialized}
-  <FAILEDINITIALIZEPGPLOT>	{Failed initializing PGPLOT... Aborting}
+  <INITIALIZEPGPLOT>             {Initializing PGPLOT}
+  <INITIALIZEDPGPLOT>            {PGPLOT initialized}
+  <FAILEDINITIALIZEPGPLOT>       {Failed initializing PGPLOT... Aborting}
 
-  <SETTINGCOMMANDFUNCTIONS>	{Setting commandfunctions}
-  <SETCOMMANDFUNCTIONS>		{Commandfunctions set}
+  <SETTINGCOMMANDFUNCTIONS>	     {Setting commandfunctions}
+  <SETCOMMANDFUNCTIONS>          {Commandfunctions set}
 
-  <INITIALIZEUI>		{Initialising user-interface}
-  <DEFAULTSLOADED>		{Defaults loaded}
-  <INPUTFILELOADED>		{Inputfile loaded}
+  <INITIALIZEUI>                 {Initialising user-interface}
+  <DEFAULTSLOADED>               {Defaults loaded}
+  <INPUTFILELOADED>              {Inputfile loaded}
 
-  <WRITEHISTORY>                {Writting history file}
-  <FREEMEMORY>		 	{Freeing allocated memory}
-  <ENDPGPLOT>			{Ending CCPGPLOT}
-  <ONEXIT>			{Exiting BuI}
+  <WRITEHISTORY>                 {Writting history file}
+  <FREEMEMORY>                   {Freeing allocated memory}
+  <ENDPGPLOT>                    {Ending CCPGPLOT}
+  <ONEXIT>                       {Exiting BuI}
