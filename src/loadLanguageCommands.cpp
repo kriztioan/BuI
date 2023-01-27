@@ -11,6 +11,28 @@
 
 extern ENV env;
 
+bool sec_parse(std::ifstream &in, std::string &out) {
+
+  out.erase();
+
+  char c;
+  in.get(c);
+  while (c != '{') {
+    in.get(c);
+    if (in.eof() || c == '>' || c == '}')
+      return (false);
+  }
+  out += c;
+  do {
+    in.get(c);
+    if (in.eof() || in.fail() || c == '{')
+      return (false);
+    out += c;
+  } while (c != '}');
+
+  return(true);
+}
+
 bool loadLanguageCommands(COM *com) {
   std::ifstream index(env.language_idx, std::ios::in),
       data(env.language_file, std::ios::in);
@@ -30,12 +52,14 @@ bool loadLanguageCommands(COM *com) {
       compare += character;
     }
   } while (compare != "[COMMANDS]");
+
   long offset;
   index.read((char *)(&offset), sizeof(long));
   data.ignore(offset);
   data.clear();
 
   while (true) {
+
     compare.erase();
     data.get(character);
     while (character != '<') {
@@ -53,47 +77,14 @@ bool loadLanguageCommands(COM *com) {
       compare += character;
     } while (character != '>');
 
-    name.erase();
-    data.get(character);
-    while (character != '{') {
-      data.get(character);
-      if (character == '>' || character == '}')
-        return (false);
-    }
-    name += character;
-    do {
-      data.get(character);
-      if (data.eof() || data.fail() || character == '{')
-        return (false);
-      name += character;
-    } while (character != '}');
+    if(!sec_parse(data, name))
+      return(false);
 
-    description.erase();
-    while (character != '{') {
-      data.get(character);
-      if (character == '>' || character == '}')
-        return (false);
-    }
-    description += character;
-    do {
-      data.get(character);
-      if (data.eof() || data.fail() || character == '{')
-        return (false);
-      description += character;
-    } while (character != '}');
-    arguments.erase();
-    while (character != '{') {
-      data.get(character);
-      if (character == '>' || character == '}')
-        return (false);
-    }
-    arguments += character;
-    do {
-      data.get(character);
-      if (data.eof() || data.fail() || character == '{')
-        return (false);
-      arguments += character;
-    } while (character != '}');
+    if(!sec_parse(data, description))
+      return(false);
+
+    if(!sec_parse(data, arguments))
+      return(false);
 
     command key = interpedKey(const_cast<char *>(compare.c_str()));
     com[key].key = key;

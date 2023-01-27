@@ -38,9 +38,27 @@ char *com_generator(const char *text, int state) {
   return NULL;
 }
 
-int arg_cmp(const void *str1, const void *str2) {
+int com_cmp(const void *str, const void *com) {
+  return strcmp(*(char **)str, ((COM *)com)->name);
+}
 
+int arg_cmp(const void *str1, const void *str2) {
   return strcmp(*(char **)str1, *(char **)str2);
+}
+
+void arg_sep(const char *str, size_t &len, char *buff, char **args,
+             size_t size) {
+
+  len = 0;
+  if (buff)
+    free(buff);
+  buff = strdup(str);
+  for (char **ptr = args; (*ptr = strsep(&buff, " ")) != NULL;)
+    if (**ptr != '\0') {
+      ++len;
+      if (++ptr >= args + size)
+        break;
+    }
 }
 
 char *arg_generator(const char *text, int state) {
@@ -49,31 +67,14 @@ char *arg_generator(const char *text, int state) {
   static size_t list_index, list_len, text_len, arg_len;
 
   if (!state) {
-    arg_len = 0;
-    if (line_buffer)
-      free(line_buffer);
-    line_buffer = strdup(rl_line_buffer);
-    for (char **arg_p = arg_list; (*arg_p = strsep(&line_buffer, " ")) != NULL;)
-      if (**arg_p != '\0') {
-        ++arg_len;
-        if (++arg_p >= &arg_list[16])
-          break;
-      }
+    arg_sep(rl_line_buffer, arg_len, line_buffer, arg_list, 16);
 
-    list_len = 0;
-    for (int i = 0; i < N_COMMANDS; i++) {
-      if (strcmp(arg_list[0], rl_com[i].name) == 0) {
-        if (arg_buffer)
-          free(arg_buffer);
-        arg_buffer = strdup(rl_com[i].arguments);
-        for (char **arg_p = list; (*arg_p = strsep(&arg_buffer, " ")) != NULL;)
-          if (**arg_p != '\0') {
-            ++list_len;
-            if (++arg_p >= &list[16])
-              break;
-          }
-      }
-    }
+    list_len = N_COMMANDS;
+    COM *com = (COM *)lfind(arg_list, rl_com, &list_len, sizeof(COM), com_cmp);
+    if (!com)
+      return NULL;
+
+    arg_sep(com->arguments, list_len, arg_buffer, list, 16);
 
     list_index = 0;
     text_len = strlen(text);
