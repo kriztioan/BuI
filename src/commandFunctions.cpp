@@ -41,7 +41,7 @@ int help(std::queue<std::string> &parameter) {
   if (!parameter.empty()) {
     const char *name = parameter.front().c_str();
     for (int i = 0; i < N_COMMANDS; i++) {
-      if (strcmp(com[i].name, name) == 0) {
+      if (strcasecmp(com[i].name, name) == 0) {
         std::ifstream ifstr(env.help_file, std::ios::in);
         ifstr.seekg(com[i].offset, std::ios::beg);
         std::cout << "\n                    Command " << com[i].name;

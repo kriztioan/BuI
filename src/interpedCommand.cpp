@@ -36,7 +36,7 @@ command interpedCommand(COM *com, std::string input,
   const char *name = parameter.front().c_str();
   parameter.pop();
   for (int i = 0; i < N_COMMANDS; i++) {
-    if (strcmp(com[i].name, name) == 0)
+    if (strcasecmp(com[i].name, name) == 0)
       return (com[i].key);
   }
   return (UNKNOWN);

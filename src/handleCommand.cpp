@@ -30,7 +30,7 @@ char *com_generator(const char *text, int state) {
   char *name;
   while (list_index < N_COMMANDS) {
     name = rl_com[list_index++].name;
-    if (strncmp(name, text, len) == 0) {
+    if (strncasecmp(name, text, len) == 0) {
       return (strdup(name));
     }
   }
@@ -39,11 +39,11 @@ char *com_generator(const char *text, int state) {
 }
 
 int com_cmp(const void *str, const void *com) {
-  return strcmp(*(char **)str, ((COM *)com)->name);
+  return strcasecmp(*(char **)str, ((COM *)com)->name);
 }
 
 int arg_cmp(const void *str1, const void *str2) {
-  return strcmp(*(char **)str1, *(char **)str2);
+  return strcasecmp(*(char **)str1, *(char **)str2);
 }
 
 void arg_sep(const char *str, size_t &len, char *buff, char **args,
@@ -83,7 +83,7 @@ char *arg_generator(const char *text, int state) {
   char *name;
   while (list_index < list_len) {
     name = list[list_index++];
-    if (strncmp(name, text, text_len) == 0 &&
+    if (strncasecmp(name, text, text_len) == 0 &&
         NULL == lfind(&name, arg_list, &arg_len, sizeof(char **), arg_cmp)) {
       return (strdup(name));
     }
